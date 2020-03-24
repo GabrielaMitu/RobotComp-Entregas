@@ -71,8 +71,8 @@ def detect(frame):
             # display the prediction
             label = "{}: {:.2f}%".format(CLASSES[idx], confidence * 100)
             print("[INFO] {}".format(label))
-            cv2.rectangle(image, (startX, startY), (endX, endY),
-                COLORS[idx], 2)
+            #cv2.rectangle(image, (startX, startY), (endX, endY),
+             #   COLORS[idx], 2)
             y = startY - 15 if startY - 15 > 15 else startY + 15
             cv2.putText(image, label, (startX, y),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
@@ -95,12 +95,39 @@ cap = cv2.VideoCapture(0)
 print("Known classes")
 print(CLASSES)
 
+contador = 0
+
+objeto = "bottle"
+
+identificou = False
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
     
     result_frame, result_tuples = detect(frame)
 
+    #for i in range (0,len(result_tuples)):
+       # if result_tuples[i][0]==objeto:
+    for i in result_tuples:
+        while objeto == i[0]:
+            contador+=1
+            print(contador)
+            if contador >= 5:
+                identificou = True
+                #contador=0
+                break
+                print(" ola ")
+        #else:
+          #      identificou=False
+              #  contador=0
+            
+    if identificou:
+                print(" oi ")
+                cv2.rectangle(result_frame,i[2],i[3],(0,255,0),3)
+                contador=0
+
+
+        
 
     # Display the resulting frame
     cv2.imshow('frame',result_frame)

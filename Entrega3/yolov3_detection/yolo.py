@@ -20,10 +20,7 @@ https://github.com/iArunava/YOLOv3-Object-Detection-with-OpenCV/blob/master/yolo
 
 
 def print_categories(boxes, confidences, classids, labels):
-	""" 
-	Nota do Miranda: 
-		Função estratégica para modificar/ usar o Yolo
-	"""
+
 	for i in range(len(classids)):
 		print(labels[classids[i]], confidences[i], boxes[i])
 
